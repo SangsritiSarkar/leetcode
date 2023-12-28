@@ -1,6 +1,7 @@
 class Solution {
 public:
-int countPartitions(int n, int d, vector<int> &arr) {
+    //SPACE OPTIMIZATION
+    int countPartitions(int n, int d, vector<int> &arr) {
     // Write your code here.
     int totsum=0;
     for(auto it:arr) totsum+=it;
@@ -8,29 +9,30 @@ int countPartitions(int n, int d, vector<int> &arr) {
     else if((totsum-d)%2 !=0) return 0;
    
     int s2=(totsum-d)/2;
-    vector<vector<int>> dp(n, vector<int> (s2+1, 0));
+    vector<int> prev(s2+1,0), curr(s2+1,0);
+    if(arr[0]==0) prev[0]=curr[0]=2;
+    else prev[0]=curr[0]=1; //not take as sum=0 but arr[0]!=0
 
-    if(arr[0]==0) dp[0][0]=2;
-    else dp[0][0]=1; //not take as sum=0 but arr[0]!=0
-
-    if(arr[0]!=0 && arr[0]<=s2) dp[0][arr[0]]=1; //take
+    if(arr[0]!=0 && arr[0]<=s2) prev[arr[0]]=curr[arr[0]]=1; //take
 
     for(int ind=1;ind<n;ind++)
     {
         for(int target=0;target<=s2;target++)
         {
-            int notTake=dp[ind-1][target];
+            int notTake=prev[target];
             int take=0;
-            if(arr[ind]<=target) take=dp[ind-1][target-arr[ind]];
+            if(arr[ind]<=target) take=prev[target-arr[ind]];
 
-            dp[ind][target]=(take+notTake);
+            curr[target]=(take+notTake);
         }
+        prev=curr;
     }
-    return dp[n-1][s2];
+    return prev[s2];
     
-}
-    int findTargetSumWays(vector<int>& nums, int target) {
+  }
+ int findTargetSumWays(vector<int>& nums, int target) {
         int n=nums.size();
         return countPartitions(n,target,nums);
     }
+
 };
