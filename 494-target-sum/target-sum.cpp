@@ -10,22 +10,22 @@ public:
    
     int s2=(totsum-d)/2;
     vector<int> prev(s2+1,0), curr(s2+1,0);
-    if(arr[0]==0) prev[0]=curr[0]=2;
-    else prev[0]=curr[0]=1; //not take as sum=0 but arr[0]!=0
+    if(arr[0]==0) prev[0]=2;
+    else prev[0]=1; //not take as sum=0 but arr[0]!=0
 
-    if(arr[0]!=0 && arr[0]<=s2) prev[arr[0]]=curr[arr[0]]=1; //take
+    if(arr[0]!=0 && arr[0]<=s2) prev[arr[0]]=1; //take
 
     for(int ind=1;ind<n;ind++)
     {
-        for(int target=0;target<=s2;target++)
+        for(int target=s2;target>=0;target--)
         {
             int notTake=prev[target];
             int take=0;
             if(arr[ind]<=target) take=prev[target-arr[ind]];
 
-            curr[target]=(take+notTake);
+            prev[target]=(take+notTake);
         }
-        prev=curr;
+        
     }
     return prev[s2];
     
