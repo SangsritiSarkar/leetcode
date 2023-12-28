@@ -1,6 +1,6 @@
 class Solution {
 public:
-    //SPACE OPTIMIZATION
+    //SPACE OPTIMIZATION in 1 array
     int countPartitions(int n, int d, vector<int> &arr) {
     // Write your code here.
     int totsum=0;
