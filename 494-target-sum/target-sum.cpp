@@ -9,7 +9,7 @@ public:
     else if((totsum-d)%2 !=0) return 0;
    
     int s2=(totsum-d)/2;
-    vector<int> prev(s2+1,0), curr(s2+1,0);
+    vector<int> prev(s2+1,0);
     if(arr[0]==0) prev[0]=2;
     else prev[0]=1; //not take as sum=0 but arr[0]!=0
 
