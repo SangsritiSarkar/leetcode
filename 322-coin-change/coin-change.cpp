@@ -1,6 +1,6 @@
 class Solution {
 public:
-//SPACE OPTIMIZATION
+//SPACE OPTIMIZATION IN 1 ARRAY
 
     int coinChange(vector<int>& coins, int amount) {
         int n=coins.size();
@@ -14,7 +14,7 @@ public:
         //STATES
         for(int ind=1;ind < n;ind++)
         {
-            for(int target=0;target <=amount;target++)
+            for(int target=0;target <= amount;target++)
             {
                 int notTake=0+prev[target];
                 int take=1e9;
