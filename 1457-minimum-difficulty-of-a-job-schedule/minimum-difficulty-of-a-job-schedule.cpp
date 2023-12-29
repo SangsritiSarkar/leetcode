@@ -11,7 +11,7 @@ public:
             return maxi;
         }
         if(dp[ind][d]!=-1) return dp[ind][d];
-        int maxP=jd[ind];
+        int maxP=INT_MIN;
         int ans=INT_MAX;
         for(int i=ind;i<=n-d;i++)
         {
