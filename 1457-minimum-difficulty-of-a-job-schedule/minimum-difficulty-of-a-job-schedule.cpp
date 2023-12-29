@@ -1,31 +1,30 @@
 class Solution {
 public:
-    int f(int ind, int d, int n, vector<int>& jd, vector<vector<int>>& dp)
-    {
-        //BASE CASE
-        //When only 1 day return max from that ind till the last
-        if(d==1)
-        {
-            int maxi=jd[ind];
-            for(int i=ind;i<n;i++) maxi=max(jd[i],maxi);
-            return maxi;
-        }
-        if(dp[ind][d]!=-1) return dp[ind][d];
-        int maxP=INT_MIN;
-        int ans=INT_MAX;
-        for(int i=ind;i<=n-d;i++)
-        {
-            maxP=max(maxP,jd[i]);
-
-            int res=maxP+f(i+1,d-1,n,jd,dp);
-            ans=min(ans,res);
-        }
-        return dp[ind][d]=ans;
-    }
-    int minDifficulty(vector<int>& arr, int d) {
-        int n=arr.size();
+    int minDifficulty(vector<int>& jd, int d) {
+        int n=jd.size();
         if(d>n) return -1;
-        vector<vector<int>> dp(n, vector<int> (d+1,-1));
-        return f(0,d,n,arr,dp);
+        vector<vector<int>> dp(n, vector<int> (d+1,0));
+        for(int i=0;i<n;i++)
+        {
+            dp[i][1]=*max_element(begin(jd)+i, end(jd));
+        }
+        for(int day=2;day<=d;day++)
+        {
+            for(int i=0;i<=n-day;i++)
+            {
+                int maxP=INT_MIN;
+                int ans=INT_MAX;
+                for(int j=i;j<=n-day;j++)
+                {
+                    maxP=max(maxP,jd[j]);
+
+                    int res=maxP+dp[j+1][day-1];
+                    ans=min(ans,res);
+                }
+                dp[i][day]=ans;
+
+            }
+        }
+        return dp[0][d];
     }
 };
