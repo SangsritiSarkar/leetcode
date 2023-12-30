@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool makeEqual(vector<string>& words) {
-        unordered_map<char,int> mp;
+        vector<int> count(26,0);
         int n=words.size();
         int tot=0;
         for(auto it:words) tot+=it.size();
@@ -10,13 +10,12 @@ public:
         for(auto it:words)
         {
             for(auto c:it)
-              mp[c]++;
+              count[c-'a']++;
         }
 
-        for(auto it:mp)
+        for(auto it:count)
         {
-            int freq=it.second;
-            if(freq%n !=0) return false;
+            if(it%n !=0) return false;
         }
         return true;
     }
