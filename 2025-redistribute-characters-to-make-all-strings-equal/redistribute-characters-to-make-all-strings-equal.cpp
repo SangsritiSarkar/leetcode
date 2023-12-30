@@ -13,10 +13,10 @@ public:
               count[c-'a']++;
         }
 
-        for(auto it:count)
-        {
-            if(it%n !=0) return false;
-        }
-        return true;
+        auto lambda=[&](int freq){
+            return freq%n==0;
+        };
+
+        return all_of(begin(count),end(count),lambda);
     }
 };
