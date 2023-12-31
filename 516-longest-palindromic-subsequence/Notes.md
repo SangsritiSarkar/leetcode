@@ -1,1 +1,1 @@
-<h2>longest-palindromic-subsequence Notes</h2><hr>//TABUL
+<h2>longest-palindromic-subsequence Notes</h2><hr>//TABULATION
