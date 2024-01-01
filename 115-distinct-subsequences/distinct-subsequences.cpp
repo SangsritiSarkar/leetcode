@@ -45,7 +45,7 @@ public:
 
 //TABULATION   
     
-    /*int numDistinct(string s1, string s2) {
+    int numDistinct(string s1, string s2) {
         int n=s1.size();
         int m=s2.size();
         vector<vector<double>> dp(n+1, vector<double> (m+1,0));
@@ -56,9 +56,7 @@ public:
             for(int j=1;j<=m;j++)
             {
                 if(s1[i-1]==s2[j-1]){
-                    int count =dp[i-1][j-1];
-                    int stay= dp[i-1][j];
-                    dp[i][j]= count+stay;
+                    dp[i][j]= dp[i-1][j-1]+dp[i-1][j];
                 }
             else
                 dp[i][j]=dp[i-1][j]; 
@@ -67,22 +65,6 @@ public:
         
         return (int)dp[n][m];
 
-    }  */
-    int numDistinct(string s, string t) {
-        int m = s.size();
-        int n = t.size();
-        vector<vector<double>> dp(m+1,vector<double>(n+1,0));
-        for(int i=0;i<=m;i++)
-            dp[i][0] = 1;
-        
-        for(int i=1;i<=m;i++){
-            for(int j=1;j<=n;j++){
-                if(s[i-1] == t[j-1])
-                    dp[i][j] = dp[i-1][j-1] + dp[i-1][j];
-                else
-                    dp[i][j] = dp[i-1][j];
-            }
-        }
-        return (int)dp[m][n];
-    }
+    }  
+    
 };
