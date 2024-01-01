@@ -1,1 +1,1 @@
-<h2>wildcard-matching Notes</h2><hr>//SPACE OPTIMIZTION
+<h2>wildcard-matching Notes</h2><hr>//SPACE OPTIMIZATION
