@@ -1,1 +1,1 @@
-<h2>best-time-to-buy-and-sell-stock-with-transaction-fee Notes</h2><hr>SPACE OPTIMIZATION
+<h2>best-time-to-buy-and-sell-stock-with-transaction-fee Notes</h2><hr>VARIABLE
