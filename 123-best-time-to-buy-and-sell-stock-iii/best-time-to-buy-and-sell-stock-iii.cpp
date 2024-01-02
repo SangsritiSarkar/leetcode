@@ -1,24 +1,27 @@
 class Solution {
 public:
-//MEMOIZATION
-    int f(int ind, int trans, int n ,vector<int> &val, vector<vector<int>>& dp)
+//TABULATION
+  
+    int maxProfit(vector<int>& val) {
+        int n=val.size();
+        vector<vector<int>> dp(n+1, vector<int>(5,0));
+        int profit=0;
+        for(int ind=n-1;ind>=0;ind--)
         {
-            if(trans==4 || ind==n) return 0;
-            if(dp[ind][trans]!=-1) return dp[ind][trans];
-            int profit=0;
-            if(trans%2==0)
+            for(int trans=3;trans>=0;trans--)
             {
-                profit=max(-val[ind]+f(ind+1,trans+1,n,val,dp), 0+f(ind+1,trans,n,val,dp));
+                if(trans%2==0)
+                {
+                    profit=max(-val[ind]+dp[ind+1][trans+1], 0+dp[ind+1][trans]);
+                }
+                else
+                {
+                    profit=max(val[ind]+dp[ind+1][trans+1], 0+dp[ind+1][trans]);
+                }
+                dp[ind][trans]=profit;
+
             }
-            else
-            {
-                profit=max(val[ind]+f(ind+1,trans+1,n,val,dp), 0+f(ind+1,trans,n,val,dp));
-            }
-            return dp[ind][trans]=profit;
         }
-    int maxProfit(vector<int>& prices) {
-        int n=prices.size();
-        vector<vector<int>> dp(n+1, vector<int>(4,-1));
-        return f(0,0,n,prices,dp);
+        return dp[0][0];
     }
 };
