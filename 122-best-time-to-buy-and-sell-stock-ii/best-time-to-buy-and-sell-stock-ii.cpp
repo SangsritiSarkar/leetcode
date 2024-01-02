@@ -1,7 +1,5 @@
 class Solution {
 public:
-//TABULATION
-
     int maxProfit(vector<int>& val) {
         int n=val.size();
         vector<vector<int>> dp(n+1, vector<int> (2,0));
@@ -14,7 +12,7 @@ public:
             {
                 if(buy)
                 {
-                    profit=max(-val[ind]+dp[ind][0], 0+dp[ind+1][1]);
+                    profit=max(-val[ind]+dp[ind+1][0], 0+dp[ind+1][1]);
                 }
                 else
                 {
