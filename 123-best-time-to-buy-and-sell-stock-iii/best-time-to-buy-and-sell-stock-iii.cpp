@@ -1,10 +1,10 @@
 class Solution {
 public:
-//TABULATION
+//SPACE OPTIMIZATION
   
     int maxProfit(vector<int>& val) {
         int n=val.size();
-        vector<vector<int>> dp(n+1, vector<int>(5,0));
+        vector<int> ahead(5,0);
         int profit=0;
         for(int ind=n-1;ind>=0;ind--)
         {
@@ -12,16 +12,16 @@ public:
             {
                 if(trans%2==0)
                 {
-                    profit=max(-val[ind]+dp[ind+1][trans+1], 0+dp[ind+1][trans]);
+                    profit=max(-val[ind]+ahead[trans+1], 0+ahead[trans]);
                 }
                 else
                 {
-                    profit=max(val[ind]+dp[ind+1][trans+1], 0+dp[ind+1][trans]);
+                    profit=max(val[ind]+ahead[trans+1], 0+ahead[trans]);
                 }
-                dp[ind][trans]=profit;
+                ahead[trans]=profit;
 
             }
         }
-        return dp[0][0];
+        return ahead[0];
     }
 };
