@@ -1,29 +1,24 @@
 class Solution {
 public:
-//SPACE OPTIMIZATION
-    
-    int maxProfit(vector<int>& val) {
-        int n=val.size();
-        vector<vector<int>> ahead(2, vector<int> (3,0));
-        int profit=0;
-        for(int ind=n-1;ind>=0;ind--)
+//MEMOIZATION
+    int f(int ind, int trans, int n ,vector<int> &val, vector<vector<int>>& dp)
         {
-            for(int buy=0; buy<=1;buy++)
+            if(trans==4 || ind==n) return 0;
+            if(dp[ind][trans]!=-1) return dp[ind][trans];
+            int profit=0;
+            if(trans%2==0)
             {
-                for(int cap=1;cap<=2;cap++)
-                {
-                    if(buy)
-                    {
-                        profit=max(-val[ind]+ahead[0][cap], 0+ahead[1][cap]);
-                    }
-                    else
-                    {
-                        profit=max(val[ind]+ahead[1][cap-1], 0+ahead[0][cap]);
-                    }
-                    ahead[buy][cap]=profit;
-                }
+                profit=max(-val[ind]+f(ind+1,trans+1,n,val,dp), 0+f(ind+1,trans,n,val,dp));
             }
+            else
+            {
+                profit=max(val[ind]+f(ind+1,trans+1,n,val,dp), 0+f(ind+1,trans,n,val,dp));
+            }
+            return dp[ind][trans]=profit;
         }
-        return ahead[1][2];
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size();
+        vector<vector<int>> dp(n+1, vector<int>(4,-1));
+        return f(0,0,n,prices,dp);
     }
 };
