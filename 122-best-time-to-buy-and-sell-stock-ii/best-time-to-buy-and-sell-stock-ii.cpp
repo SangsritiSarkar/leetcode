@@ -1,9 +1,10 @@
 class Solution {
 public:
+//SPACE OPTIMIZATION
     int maxProfit(vector<int>& val) {
         int n=val.size();
-        vector<vector<int>> dp(n+1, vector<int> (2,0));
-        dp[n][0]=dp[n][1]=0;
+        vector<int> ahead(2,0), curr(2,0);
+        //ahead[0]=ahead[1]=0;
         int profit=0;
         for(int ind=n-1;ind>=0;ind--)
         {
@@ -12,17 +13,18 @@ public:
             {
                 if(buy)
                 {
-                    profit=max(-val[ind]+dp[ind+1][0], 0+dp[ind+1][1]);
+                    profit=max(-val[ind]+ahead[0], 0+ahead[1]);
                 }
                 else
                 {
-                    profit=max(val[ind]+dp[ind+1][1], 0+dp[ind+1][0]);
+                    profit=max(val[ind]+ahead[1], 0+ahead[0]);
                 }
-                dp[ind][buy]=profit;
+                curr[buy]=profit;
 
             }
+            ahead=curr;
            
         }
-        return dp[0][1];
+        return ahead[1];
     }
 };
