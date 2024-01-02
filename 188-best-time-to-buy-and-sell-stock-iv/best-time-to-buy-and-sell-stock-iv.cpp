@@ -2,26 +2,24 @@ class Solution {
 public:
     int maxProfit(int k, vector<int>& val) {
         int n=val.size();
-        vector<vector<int>> ahead(2, vector<int> (k+1,0));
+        vector<int> ahead(2*k + 1,0);
         int profit=0;
         for(int ind=n-1;ind>=0;ind--)
         {
-            for(int buy=0; buy<=1;buy++)
+            for(int trans=2*k-1;trans>=0;trans--)
             {
-                for(int cap=1;cap<=k;cap++)
+                if(trans%2==0)
                 {
-                    if(buy)
-                    {
-                        profit=max(-val[ind]+ahead[0][cap], 0+ahead[1][cap]);
-                    }
-                    else
-                    {
-                        profit=max(val[ind]+ahead[1][cap-1], 0+ahead[0][cap]);
-                    }
-                    ahead[buy][cap]=profit;
+                    profit=max(-val[ind]+ahead[trans+1], 0+ahead[trans]);
                 }
+                else
+                {
+                    profit=max(val[ind]+ahead[trans+1], 0+ahead[trans]);
+                }
+                ahead[trans]=profit;
+
             }
         }
-        return ahead[1][k];
+        return ahead[0];
     }
 };
