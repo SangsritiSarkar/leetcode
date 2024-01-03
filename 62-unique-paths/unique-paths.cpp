@@ -101,6 +101,6 @@ public:
     //     {
     //         res=res*(N-i)/(i+1);
     //     }
-    //     return (int)res;
+    //     return (int)res ;
     // }
 };
