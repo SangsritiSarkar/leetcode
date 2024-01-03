@@ -53,37 +53,49 @@ public:
     
 
     //SPACE OPTIMIZATION
-    int uniquePaths(int m, int n){
-        vector<int> prev(n,0);
-        for(int i=0;i<m;i++)
-        {
-            vector<int> curr(n,0);
-            for(int j=0;j<n;j++)
-            {
-                if(i==0 && j==0)
-                {
-                    curr[j]=1; 
-                    continue;
-                }
-                int up=0;
-                int left=0;
-                if(i>0) up=prev[j];
-                if(j>0) left=curr[j-1];
-                curr[j]=up+left;
-            }
-            prev=curr;
-        }
-        return prev[n-1];
-    }   
+    // int uniquePaths(int m, int n){
+    //     vector<int> prev(n,0);
+    //     for(int i=0;i<m;i++)
+    //     {
+    //         vector<int> curr(n,0);
+    //         for(int j=0;j<n;j++)
+    //         {
+    //             if(i==0 && j==0)
+    //             {
+    //                 curr[j]=1; 
+    //                 continue;
+    //             }
+    //             int up=0;
+    //             int left=0;
+    //             if(i>0) up=prev[j];
+    //             if(j>0) left=curr[j-1];
+    //             curr[j]=up+left;
+    //         }
+    //         prev=curr;
+    //     }
+    //     return prev[n-1];
+    // }   
 
     //TIME OPTIMIZATION
+    int uniquePaths(int m, int n){
+        int N=m+n-2;
+        int r=m-1;
+        double res=1;
+        for(int i=1;i<=r;i++)
+        {
+            res=res*(N-r+i)/i;
+        }
+        return (int)res;
+    }
+
+    //Time Otimization 2nd formula
     // int uniquePaths(int m, int n){
     //     int N=m+n-2;
     //     int r=m-1;
     //     double res=1;
-    //     for(int i=1;i<=r;i++)
+    //     for(int i=0;i<r;i++)
     //     {
-    //         res=res*(N-r+i)/i;
+    //         res=res*(N-i)/(i+1);
     //     }
     //     return (int)res;
     // }
