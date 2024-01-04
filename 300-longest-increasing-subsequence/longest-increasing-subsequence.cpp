@@ -3,7 +3,7 @@ public:
     int lengthOfLIS(vector<int>& nums) {
        
         int n=nums.size(), maxi=1;
-        vector<int> dp(n,1), hash(n,1);
+        vector<int> dp(n,1);
         for(int i=0;i<n;i++)
         {
             for(int prev=0; prev<i;prev++)
