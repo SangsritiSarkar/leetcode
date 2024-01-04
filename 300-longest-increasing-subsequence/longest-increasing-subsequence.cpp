@@ -1,6 +1,6 @@
 class Solution {
 public:
-//TABULATION
+//MEMOIZATION
     int f(int ind, int prev, int n, vector<int>& nums, vector<vector<int>>& dp)
     {
         if(ind==n) return 0;
