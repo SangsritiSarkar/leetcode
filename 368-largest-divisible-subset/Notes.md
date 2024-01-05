@@ -1,1 +1,1 @@
-<h2>largest-divisible-subset Notes</h2><hr>1.  push_back
+<h2>largest-divisible-subset Notes</h2><hr>2. 
