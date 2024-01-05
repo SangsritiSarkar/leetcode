@@ -1,1 +1,1 @@
-<h2>longest-increasing-subsequence Notes</h2><hr>ACCORDING TOO 
+<h2>longest-increasing-subsequence Notes</h2><hr>ACCORDING TO
