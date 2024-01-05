@@ -8,9 +8,9 @@ public:
         {
             for(int prev=0; prev<i;prev++)
             {
-                if(nums[prev]<nums[i])
+                if(nums[prev]<nums[i] && 1 + dp[prev]>dp[i])
                 {
-                    dp[i]=max(dp[i], 1+dp[prev]);
+                    dp[i]=1+dp[prev];
                 }
             }
             if(dp[i]>maxi)
