@@ -20,7 +20,8 @@ public:
             if(dp[i]>maxi)
                maxi=dp[i];
         }
-        //return maxi;
+        //cout<<maxi<<endl;
+        
         for(int i=0;i<n;i++)
         {
             if(dp[i]==maxi) c+=ct[i];
