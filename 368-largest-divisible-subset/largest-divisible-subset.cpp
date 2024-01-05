@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> largestDivisibleSubset(vector<int>& nums) {
-        int n=nums.size(),maxi=1,lastInd;
+        int n=nums.size(),maxi=1,lastInd=0;
         if(n==1) return nums;
         sort(nums.begin(),nums.end());
         vector<int> dp(n,1), hash(n);
@@ -22,21 +22,23 @@ public:
                 lastInd=i;
             }
         }
-         vector<int> lis;
-        // lis[maxi-1]=nums[lastInd];
-        // int ind=maxi-2;
-        // while(lastInd!=hash[lastInd])
-        // {
-        //     lastInd=hash[lastInd];
-        //     lis[ind--]=nums[lastInd];
-        // }
-        lis.push_back(nums[lastInd]);
+        vector<int> lis(maxi);
+        lis[maxi-1]=nums[lastInd];
+        int ind=maxi-2;
         while(lastInd!=hash[lastInd])
         {
             lastInd=hash[lastInd];
-            lis.push_back(nums[lastInd]);
+            if(ind>=0) lis[ind--]=nums[lastInd];
         }
-        reverse(lis.begin(),lis.end());
+        
+        //vector<int> lis;
+        // lis.push_back(nums[lastInd]);
+        // while(lastInd!=hash[lastInd])
+        // {
+        //     lastInd=hash[lastInd];
+        //     lis.push_back(nums[lastInd]);
+        // }
+        // reverse(lis.begin(),lis.end());
         return lis;
     }
 };
