@@ -1,5 +1,6 @@
 class Solution {
 public:
+    unordered_map<string, int> mp;
     bool common(string &ori, string temp)
     {
         int arr[26]={0};
@@ -17,6 +18,7 @@ public:
     int solve(int ind, string temp, vector<string>& arr, int n)
     {
         if(ind>=n) return temp.size();
+        if(mp.find(temp)!=mp.end()) return mp[temp];
         int pick=0,not_pick=0;
         if(common(arr[ind],temp)){
             not_pick=solve(ind+1,temp,arr,n);
@@ -26,10 +28,11 @@ public:
             not_pick=solve(ind+1,temp,arr,n);
             pick=solve(ind+1,temp+arr[ind],arr,n);
         }
-        return max(pick,not_pick);
+        return mp[temp]=max(pick,not_pick);
     }
     int maxLength(vector<string>& arr) {
         string temp="";
+        mp.clear();
         int n=arr.size();
         return solve(0,temp,arr,n);
     }
