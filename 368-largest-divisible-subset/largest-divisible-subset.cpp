@@ -1,44 +1,31 @@
+
 class Solution {
 public:
     vector<int> largestDivisibleSubset(vector<int>& nums) {
-        int n=nums.size(),maxi=1,lastInd=0;
-        if(n==1) return nums;
-        sort(nums.begin(),nums.end());
-        vector<int> dp(n,1), hash(n);
-        for(int i=0;i<n;i++)
-        {
-            hash[i]=i;
-            for(int j=0;j<i;j++)
-            {
-                if(nums[i]%nums[j]==0 && 1+dp[j]>dp[i])
-                {
-                    dp[i]=1+dp[j];
-                    hash[i]=j;
+        int n=nums.size(), maxi=1, num=-1;
+        vector<int>v;
+        sort(nums.begin(), nums.end());
+        vector<int>dp(n, 1);
+        for(int i=1; i<n; i++){
+            for(int j=0; j<i; j++){
+                if(!(nums[i]%nums[j]) && dp[i]<dp[j]+1){
+                    dp[i]=dp[j]+1;
+                    if(maxi<dp[i]){
+                        maxi=dp[i];
+                    }
                 }
             }
-            if(dp[i]>maxi)
-            {
-                maxi=dp[i];
-                lastInd=i;
+        }
+        for(int i=n-1; i>=0; i--){
+            if(maxi==dp[i] && (num==-1 || !(num%nums[i]))){
+                v.push_back(nums[i]);
+                maxi--;
+                num=nums[i];
             }
         }
-        vector<int> lis(maxi);
-        lis[maxi-1]=nums[lastInd];
-        int ind=maxi-2;
-        while(lastInd!=hash[lastInd])
-        {
-            lastInd=hash[lastInd];
-            if(ind>=0) lis[ind--]=nums[lastInd];
-        }
-        
-        //vector<int> lis;
-        // lis.push_back(nums[lastInd]);
-        // while(lastInd!=hash[lastInd])
-        // {
-        //     lastInd=hash[lastInd];
-        //     lis.push_back(nums[lastInd]);
-        // }
-        // reverse(lis.begin(),lis.end());
-        return lis;
+        return v;
     }
 };
+
+
+
