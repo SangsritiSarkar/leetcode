@@ -1,18 +1,11 @@
 class Solution {
 public:
     int timeRequiredToBuy(vector<int>& t, int k) {
-        int n=t.size();
-        int x=t[k];
-        int c=0;
-        for(int i=0;i<=k;i++)
+        int n=t.size(),c=0;
+        for(int i=0;i<n;i++)
         {
-            if(t[i]>=x) c+=x;
-            else c+=t[i];
-        }
-        for(int i=k+1;i<n;i++)
-        {
-            if(t[i]>=x) c+=x-1;
-            else c+=t[i];
+            if(i<=k) c+=(t[i]>=t[k])?t[k]:t[i];
+            else c+=(t[i]>=t[k])?t[k]-1:t[i];
         }
         return c;
     }
