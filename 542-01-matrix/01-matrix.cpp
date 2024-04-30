@@ -28,7 +28,7 @@ public:
         int r=it.first.first;
         int c=it.first.second;
         int l=it.second;
-        dist[r][c]=l;
+        //dist[r][c]=l;
        
         
         for(int i=0;i<4;i++)
@@ -40,6 +40,7 @@ public:
                 {
                    q.push({{delrow,delcol},l+1});
                    vis[delrow][delcol]=1;
+                   dist[delrow][delcol]=l+1;
                 }
 
             
