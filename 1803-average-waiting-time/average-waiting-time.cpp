@@ -6,7 +6,7 @@ public:
         {
             a=c[i][0];
             ck=c[i][1];
-            if(a>st) {tt+=c[i][1]; st=a+c[i][1];}
+            if(a>st) {tt+=ck; st=a+ck;}
             else {tt+=ck+st-a;
              st+=ck;
              }
