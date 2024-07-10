@@ -6,13 +6,7 @@ public:
         for(auto st:logs)
         {
             if(st[0]!='.') s++;
-            else if(st=="../") 
-            {
-                if(s==0) continue;
-                else s--;
-            }
-            prev=st;
-            cout<<s<<"\n";
+            else if(st=="../" and s!=0) s--;
         }
         return s;
     }
