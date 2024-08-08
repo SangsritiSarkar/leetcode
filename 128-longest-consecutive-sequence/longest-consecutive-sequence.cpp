@@ -5,7 +5,7 @@ public:
         int x,ans=0,cnt=1;
         unordered_set<int> st;
         for(auto it:nums) st.insert(it);
-        for(auto it:nums)
+        for(auto it:st)
         {
             if(st.find(it-1)==st.end())
             {
