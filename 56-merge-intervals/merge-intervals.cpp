@@ -5,11 +5,8 @@ public:
         sort(v.begin(),v.end(),[](const vector<int> &a, const vector<int> &b){
             return a[0]<b[0];
         });
-       
         int e=v[0][1],s=v[0][0];
-        for(int i=1;i<v.size();++i){
-            
-            
+        for(int i=1;i<v.size();++i){           
             if(e>=v[i][0]) {e=max(e,v[i][1]); }
             else{
                 ans.push_back({s,e});
