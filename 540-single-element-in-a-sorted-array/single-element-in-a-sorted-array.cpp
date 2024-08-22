@@ -9,7 +9,7 @@ public:
         while(l<=h)
         {
             int mid=(l+h)/2;
-            if(mid==0 and nums[mid]!=nums[mid+1]) return nums[mid];
+            if((mid==0 and nums[mid]!=nums[mid+1]) or (mid==n-1 and nums[mid]!=nums[mid-1])) return nums[mid];
             if(nums[mid]!=nums[mid-1] and nums[mid]!=nums[mid+1]) return nums[mid];
             if(mid&1) //odd index
             {
@@ -27,6 +27,6 @@ public:
             }
 
         }
-        return nums[l+1];
+        return -1;
     }
 };
