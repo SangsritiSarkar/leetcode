@@ -37,7 +37,7 @@ public:
 
         for(int i=0;i<numCourses;i++){
             vis[i] = 0;
-            pathVis[i]=0;
+           
         }  
         
         for(int i=0;i<numCourses;i++)
