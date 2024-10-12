@@ -12,21 +12,23 @@ public:
 
         vector<int> dist(n+1,1e9);
 
-        //min_heap
-        priority_queue<pair<int,int> ,vector<pair<int,int>>, greater<pair<int,int>>> pq; 
+        //set
+        set<pair<int,int>> st;
 
-        pq.push({0,k});
+        st.insert({0,k});
         dist[k]=0;
-        while(!pq.empty()){
-            int node=pq.top().second;
-            int d=pq.top().first;
-            pq.pop();
+        while(!st.empty()){
+            auto x=*(st.begin());
+            int node=x.second;
+            int d=x.first;
+            st.erase(x);
             for(auto it:adj[node]){
                 int adjNode=it.first;
                 int adjDist=it.second;
                 if(d+adjDist<dist[adjNode]) {
+                    if(dist[adjNode]!=1e9) st.erase({dist[adjNode], adjNode});
                     dist[adjNode]=d+adjDist;
-                    pq.push({dist[adjNode],adjNode});
+                    st.insert({dist[adjNode],adjNode});
                 }
             }
         }
