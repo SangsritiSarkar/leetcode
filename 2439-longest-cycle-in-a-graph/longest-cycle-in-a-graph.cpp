@@ -1,60 +1,50 @@
 class Solution {
 public:
-    vector<bool> visited;
-    int count;
+    void toposort(int node, vector<int>& edges, vector<int>& vis, stack<int> &st) {
+        vis[node]=1;
+        int it= edges[node]; 
+        if(it!=-1 and !vis[it]) toposort(it, edges,vis,st);
+        
+        st.push(node);
+    }
 
+    void dfs(int node, vector<vector<int>> &revadj, vector<int>& vis, int &cnt){
+        vis[node]=1; cnt++;
+        for(auto it:revadj[node]) {
+            if(!vis[it]) dfs(it,revadj,vis,cnt);
+        }
+    }
     int longestCycle(vector<int>& edges) {
-        int len = edges.size();
+        int n=edges.size();
+        
+
+        vector<int> vis(n);
         stack<int> st;
-        visited.resize(len, false);
-
-        // Run random order DFS and add vertices to stack while backtracking
-        for (int i = 0; i < len; i++) {
-            if (edges[i] != -1 && !visited[i])
-                dfs(edges, i, st);
+        //TOPOSORT DFS
+        for(int i=0;i<n;++i){
+            if(edges[i]!=-1 and !vis[i]) toposort(i,edges,vis,st);
         }
 
-        // Construct a graph with reversed edges
-        vector<vector<int>> graph(len);
-        for (int i = 0; i < len; i++) {
-            if (edges[i] != -1)
-                graph[edges[i]].push_back(i);
+        //REVERSE GRAPH
+        vector<vector<int>> revadj(n);
+        for(int i=0;i<n;++i){
+            vis[i]=0;
+            if(edges[i]!=-1) revadj[edges[i]].push_back(i);
         }
 
-        // Reset the visited array
-        fill(visited.begin(), visited.end(), false);
-
-        int maxCycle = 0;
-
-        // Run stack-wise DFS to mark Strongly Connected Components
-        while (!st.empty()) {
-            int top = st.top();
+        //DFS ON REVERSE GRAPH ACCORDING TO FINISH TIME I.E STACK
+        int ans=0,cnt;
+        while(!st.empty()){
+            int node = st.top();
             st.pop();
-            if (visited[top])
-                continue;
-            count = 0;
-            specialDfs(graph, top);
-            maxCycle = max(maxCycle, count);
+            if(!vis[node]){
+                cnt=0;
+                dfs(node,revadj,vis,cnt);
+                ans=max(ans,cnt);
+            }
+            
         }
-
-        return maxCycle > 1 ? maxCycle : -1;
-    }
-
-    void dfs(vector<int>& edges, int source, stack<int>& st) {
-        visited[source] = true;
-        int child = edges[source];
-        if (child != -1 && !visited[child])
-            dfs(edges, child, st);
-        st.push(source); 
-    }
-
-    void specialDfs(vector<vector<int>>& graph, int source) {
-        visited[source] = true;
-        // Count the number of elements in each Strongly Connected Component
-        count++;
-        for (int child : graph[source]) {
-            if (!visited[child]) 
-                specialDfs(graph, child);
-        }
+        if(ans==1) return -1;
+        return ans;
     }
 };
