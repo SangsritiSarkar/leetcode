@@ -1,30 +1,20 @@
 class Solution {
 public:
+    void dfs(int r, int c, int color, int nr, int nc, vector<vector<int>>& image, int ori){
+        if(r<0 or r>=nr or c<0 or c>=nc or image[r][c]!=ori or image[r][c]==color) return;
+        image[r][c]=color;
+        dfs(r+1,c,color,nr,nc,image,ori);
+        dfs(r-1,c,color,nr,nc,image,ori);
+        dfs(r,c+1,color,nr,nc,image,ori);
+        dfs(r,c-1,color,nr,nc,image,ori);
+    }
+
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-        queue<pair<int,int>> q;
-        int col=image[sr][sc];
-        if(col==color) return image;
-        image[sr][sc]=color;
-        q.push({sr,sc});
-        vector<int> r={-1,0,0,1};
-        vector<int> c={0,-1,1,0};
         int nr=image.size();
         int nc=image[0].size();
-
-        while(!q.empty()){
-            auto node=q.front();
-            int tr=node.first;
-            int tc=node.second;
-            q.pop();
-            for(int i=0;i<4;++i){
-                int delrow=tr+r[i];
-                int delcol=tc+c[i];
-                if(delrow>=0 and delrow<nr and delcol>=0 and delcol<nc and image[delrow][delcol]==col){
-                    image[delrow][delcol]=color;
-                    q.push({delrow,delcol});
-                }
-            }
-        }
+        if(image[sr][sc]==color) return image;
+        int ori=image[sr][sc];
+        dfs(sr,sc,color,nr,nc,image,ori);
         return image;
     }
 };
