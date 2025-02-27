@@ -1,20 +1,19 @@
 class Solution {
 public:
+    double func(double x,long long n){
+       
+        if(n==1) return x;
+        double half=func(x,n/2);
+        if(n&1){
+            return half*half*x;
+        }
+        else return half*half;
+    }
     double myPow(double x, int n) {
         long long nn=n;
-        double ans=1.0;
-        if(nn<0) nn*=-1;
-        while(nn){
-            if(nn%2){
-                ans*=x;
-                nn--;
-            }
-            else
-            {
-                x*=x;nn/=2;
-            }
-        }
-        if(n<0) ans=(double)(1.0)/(double)(ans);
-        return ans;
+        if(nn==0) return 1;       
+        else if(nn>0) return func(x,nn);
+        return 1.0/func(x,-nn);
     }
+    
 };
