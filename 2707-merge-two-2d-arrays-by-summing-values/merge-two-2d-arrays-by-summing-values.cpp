@@ -18,8 +18,8 @@ public:
             }
         }
 
-        while(i<n1) {ans.push_back({nums1[i][0],nums1[i][1]}); ++i;}
-        while(j<n2) {ans.push_back({nums2[j][0],nums2[j][1]}); ++j;}
+        while(i<n1) {ans.push_back(nums1[i]); ++i;}
+        while(j<n2) {ans.push_back(nums2[j]); ++j;}
 
         return ans;
     }
