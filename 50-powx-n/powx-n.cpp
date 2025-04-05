@@ -1,10 +1,12 @@
 class Solution {
 public:
     double func(double x, long long p){
-        if(p==0) return 1;
-        double half=func(x,p/2);
-        if((p&1)==0) return half*half;
-        return x*half*half;
+        double ans=1.0;
+        while(p>0){
+            if(p&1) {ans*=x; --p;}
+            else {x*=x; p>>=1;}
+        }
+        return ans;
     }
     double myPow(double x, int n) {
         long long p=n;
