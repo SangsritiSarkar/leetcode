@@ -1,20 +1,20 @@
 class Solution {
 public:
     
-    void solve(string &s, int n, vector<string> &ans, int open, int close){
+    void solve(string s, int n, vector<string> &ans, int open, int close){
         if(s.size()==2*n){
             ans.push_back(s);
             return;
         }
         if(open<n){
-            s.push_back('(');
-            solve(s,n,ans,open+1, close);
-            s.pop_back();
+            
+            solve(s+'(',n,ans,open+1, close);
+           
         }
         if(close<open){
-            s.push_back(')');
-            solve(s,n,ans,open, close+1);
-            s.pop_back();
+           
+            solve(s+')',n,ans,open, close+1);
+            
         }
     }
 
