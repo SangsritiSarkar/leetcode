@@ -7,10 +7,11 @@ public:
         }
         for(int i=ind;i<cand.size();++i){
             if(i!=ind and cand[i]==cand[i-1]) continue; //if i==ind it is okay
-            if(target<cand[i]) return;
-            ds.push_back(cand[i]);
-            solve(i+1, target-cand[i], ds, ans, cand);
-            ds.pop_back();
+            if(target>=cand[i]) {
+                ds.push_back(cand[i]);
+                solve(i+1, target-cand[i], ds, ans, cand);
+                ds.pop_back();
+            }
 
         }
 
