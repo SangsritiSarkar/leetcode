@@ -31,12 +31,10 @@ public:
             adj[it[0]].push_back(it[1]);
             adj[it[1]].push_back(it[0]);
         }
-        for(int i=1;i<=n;++i)
-        {
-            if(!c[i-1]){
-                if(!solve(i,n,c,adj)) continue;
-            }
-        }
+        if(!solve(1, n, c, adj)) return {};
+        return c;
+
+
         return c;
     }
 };
