@@ -8,15 +8,17 @@ public:
         return true;
     }
 
-    void solve(int node, int n, vector<int> &c, vector<vector<int>> &adj){
+    void solve(int node, int n, vector<int> &c, vector<vector<int>> &adj, int &found){
         if(node==n+1){
+            found=1;
             return ;
         }
         for(int flower=1; flower<=4; ++flower){
             if(possible(node, flower,c, adj)){
                 c[node-1]=flower;
-                solve(node+1,n,c,adj);
-                break;//no bcktracking required becoz a sol exist
+                solve(node+1,n,c,adj,found);
+                if(found) return;
+                c[node-1]=0;
             }
         }
         
@@ -31,10 +33,11 @@ public:
             adj[it[0]].push_back(it[1]);
             adj[it[1]].push_back(it[0]);
         }
-        solve(1, n, c, adj);
+        int found=0;
+        solve(1, n, c, adj, found);
         return c;
 
 
-        return c;
+        
     }
 };
