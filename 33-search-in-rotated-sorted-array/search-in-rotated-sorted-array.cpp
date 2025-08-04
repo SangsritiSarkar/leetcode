@@ -1,23 +1,23 @@
 class Solution {
 public:
-    int search(vector<int>& arr, int target) {
-        int n=arr.size();
-        int l=0,h=n-1;
+    int search(vector<int>& nums, int target) {
+        int n=nums.size();
+        int l=0, h=n-1;
         while(l<=h){
-            int mid=(l+h)/2;
-            if(arr[mid]==target) return mid;
-            //left half is sorted
-            else if(arr[mid]>=arr[l]){
-                if(arr[l]<=target and target<arr[mid]) h=mid-1;
-                else l=mid+1;//eliminate left half
+            int mid=l+((h-l)>>1);
+            if(nums[mid]==target) return mid;
+            else if(nums[mid]>=nums[l]){
+                if(nums[l]<=target and target<=nums[mid]) h=mid-1;
+                else l=mid+1;
             }
-            //right half is sorted
-            else
-            {
-                if(arr[mid]<target and target<=arr[h]) l=mid+1;
-                else h=mid-1; //eliminate right half
+            else{
+                if(nums[mid]<=target and target<=nums[h]) l=mid+1;
+                else h=mid-1;
             }
+
         }
         return -1;
+       
+
     }
 };
