@@ -6,6 +6,8 @@ public:
             return;
         }
         for(int i=0;i<nums.size();++i){
+            // if marked skip
+            // if not marked, check if it's prev is same as this and if the prev already marked, then skip
             if((mp[i]) or (i>0 and nums[i]==nums[i-1] and mp[i-1])) continue; 
                 ds.push_back(nums[i]);
                 mp[i]=1;
