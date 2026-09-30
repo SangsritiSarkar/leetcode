@@ -1,22 +1,20 @@
 class Solution {
 public:
-    void func(int ind, vector<int> &ds, int n, vector<vector<int>> &ans, vector<int>& nums){
-        if(ind==n){
+    void func(int ind, vector<int> &nums, vector<int> &ds, vector<vector<int>> &ans){
+        if(ind==nums.size()){
             ans.push_back(ds);
             return;
         }
-        //pick
         ds.push_back(nums[ind]);
-        func(ind+1, ds, n , ans, nums);
+        func(ind+1, nums, ds, ans);
         ds.pop_back();
-        //not pick
-        func(ind+1,ds,n,ans,nums);
+        func(ind+1, nums, ds, ans);
     }
+
     vector<vector<int>> subsets(vector<int>& nums) {
-        int n=nums.size();
         vector<vector<int>> ans;
         vector<int> ds;
-        func(0,ds,n,ans,nums);
+        func(0, nums, ds, ans);
         return ans;
     }
 };
